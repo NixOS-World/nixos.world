@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>NixOS World</title>
+    <title>Guide for NixOS World</title>
     <style>
       @media (prefers-color-scheme: light) {
         :root {
@@ -59,6 +59,7 @@
       }
       .card p,
       .card code,
+      .card pre,
       .card h4 {
         padding-left: 10px;
         color: var(--secondary-text-color);
@@ -109,80 +110,104 @@
       </svg>
     </div>
     <div class="nav-title">NixOS World</div>
-    <div>
-      <input
-        type="text"
-        id="searchInput"
-        class="search"
-        placeholder="Search..."
-      />
+    <div id="cardContainer">
+      <div class="card" data-name="quickstart">
+        <h3>EN</h3>
+        <h4>Guide for NixOS World!</h4>
+        <p>Contributions are welcome!</p>
+        <p>
+          Then modify the records.json file in the source code repository. You
+          can add a document link in two ways:
+        </p>
+
+        <p>1.</p>
+
+        <p>Example code:</p>
+        <pre><code>
+{
+"title": "example",
+"description": "example",
+"url": "https://example"
+}
+
+</code></pre>
+        <p>This will redirect your website.</p>
+
+        <p>2.</p>
+        <p>Example code:</p>
+        <pre><code>
+{
+"title": "example",
+"description": "example",
+"name": "example",
+"domain": "example.com"
+}
+</code></pre>
+        <p>This will add a CNAME record in the nixos.world domain.</p>
+        <p>
+          Please note that the location of your documentation entries should be
+          placed in the appropriate place according to alphabetical order.
+        </p>
+
+        <p>
+          To ensure the usability of the documentation, I will review whether
+          your website is neatly formatted and interactive. I will provide some
+          excellent documentation website source code.
+        </p>
+
+        <p>
+          Please note that before the internationalization support is complete,
+          I only intend to provide help for Chinese users. If you want to
+          contribute to other languages, you can help this project to improve
+          multilingual support.
+        </p>
+      </div>
+      <div class="card" data-name="nix-lang">
+        <h3>CN</h3>
+        <h4>NixOS World 指南</h4>
+        <p>欢迎贡献此项目！</p>
+        <p>你需要针对你的项目制作一份对新手友好并且内容完善的文档。</p>
+        <p>
+          之后修改在源码仓库中的 records.json 文件。你有两种添加文档链接方式：
+        </p>
+        <p>1.</p>
+
+        <p>实例代码：</p>
+        <pre><code>
+{
+“title": "example",
+"description": "example",
+"url": "https://example"
+}
+</code></pre>
+        <p>这将重定向你的网站。</p>
+        <p>2.</p>
+        <p>实例代码：</p>
+        <pre><code>
+{
+“title": "example",
+"description": "example",
+"name": "example",
+"domain": "example.com"
+}
+</code></pre>
+        <p>这将在 nixos.world 域名中添加 CNAME 记录。</p>
+        <p>请注意，关于你的文档条目位置应该根据字母表顺序放置在合适的位置。</p>
+
+        <p>
+          为了保障文档的易用性，我将审核你的网站是否排版整洁，是否交互友好。我将提供一些优秀的文档网站源码。
+        </p>
+
+        <p>
+          请注意，在未完善国际化支持之前，我只打算为中文用户提供帮助。如果你希望贡献其他语言，可以帮助本项目完善多语言支持。
+        </p>
+      </div>
     </div>
-    <div id="cardContainer"></div>
     <foot class="foot"
       ><a href="https://github.com/NixOS-world/nixos.world" target="_blank"
         >Source Code</a
       ><span> / </span>
-      <a href="/guide.html" target="_blank">Guide</a>
+      <a href="/docs.html" target="_blank">Guide</a>
     </foot>
-    <script>
-      async function fetchAndDisplayRecords() {
-        const response = await fetch("/records.json");
-        const records = await response.json();
-
-        const cardContainer = document.getElementById("cardContainer");
-        cardContainer.innerHTML = "";
-
-        records.forEach((record) => {
-          const card = document.createElement("div");
-          card.className = "card";
-          card.dataset.name = record.name;
-
-          const title = document.createElement("h3");
-          title.textContent = record.title;
-
-          const description = document.createElement("p");
-          description.textContent = record.description;
-
-          card.appendChild(title);
-          card.appendChild(description);
-          cardContainer.appendChild(card);
-
-          card.addEventListener("click", () => {
-            if (record.name) {
-              window.location.href = `https://${record.name}.nixos.world`;
-            } else {
-              window.location.href = `${record.url}`;
-            }
-          });
-        });
-      }
-
-      function filterRecords() {
-        const searchInput = document
-          .getElementById("searchInput")
-          .value.toLowerCase();
-        const cards = document.querySelectorAll(".card");
-
-        cards.forEach((card) => {
-          const title = card.querySelector("h3").textContent.toLowerCase();
-          const description = card.querySelector("p").textContent.toLowerCase();
-
-          if (
-            title.includes(searchInput) ||
-            description.includes(searchInput)
-          ) {
-            card.style.display = "block";
-          } else {
-            card.style.display = "none";
-          }
-        });
-      }
-
-      document
-        .getElementById("searchInput")
-        .addEventListener("input", filterRecords);
-
-      fetchAndDisplayRecords();
-    </script>
   </body>
 </html>

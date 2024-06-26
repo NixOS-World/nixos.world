@@ -16,6 +16,10 @@ for record in records:
     name = record['name']
     content = record['domain']
 
+    if not name or not content:
+        print(f"Skipping ...")
+        continue
+
     data = {
         "secretapikey": secret_api_key,
         "apikey": api_key,
