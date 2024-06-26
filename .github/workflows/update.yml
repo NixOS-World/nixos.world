@@ -1,0 +1,27 @@
+name: Create DNS Records
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  create-dns-records:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4.1.7
+
+    - name: Set up Python
+      uses: actions/setup-python@v5.1.0
+      with:
+        python-version: '3.x'
+
+    - name: Install requests library
+      run: pip install requests
+
+    - name: Create DNS records
+      run: |
+        SECRET_API_KEY="${{ secrets.SECRET_API_KEY }}" API_KEY="${{ secrets.API_KEY }}" python create_dns_records.py

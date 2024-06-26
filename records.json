@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Quick Start",
+    "description": "A tutorial for new NixOS users.",
+    "name": "quickstart",
+    "domain": "nixos-quickstart.github.io"
+  },
+{
+    "title": "Nix Language",
+    "description": "A tutorial for Nix language",
+    "name": "nix-lang",
+    "domain": "nix-lang.github.io"
+}
+]
